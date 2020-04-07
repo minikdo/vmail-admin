@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css?family=Prata|Source+Sans+Pro:300,400');
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+    font-family: "Source Sans Pro", "Open Sans", sans-serif;
+    color: #0091b5;
+    font-size: 1.7rem;
+}
+.navbar div ul li {
+    float: right;
+}
+ul {
+    list-style-type: none;
+}
+li {
+    padding-top: 15px;
+    padding-left: 15px;
+}
+a {
+    color: #db5000;
+    font-weight: bold;
+    text-decoration: none;
+}
+a:hover {
+    color: #db5000;
+    font-weight: bold;
+    text-decoration: underline;
+}
+.gray {
+    color: gray;
+}
+.min200 {
+    min-width: 200px;
+}

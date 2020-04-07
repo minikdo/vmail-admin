@@ -1,0 +1,5 @@
+remote_host: linode2
+remote_user: domino
+git_repo: https://github.com/minikdo/mails.git
+proj_path: /home/domino/sites/mails/
+wsgi_path: /home/domino/sites/mails/mails/
