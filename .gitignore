@@ -7,3 +7,5 @@ __pycache__/
 .project
 secrets.json
 /media
+vars.yml
+
