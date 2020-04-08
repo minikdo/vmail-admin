@@ -1,0 +1,23 @@
+* create postgresql views
+
+#+BEGIN_SRC sql
+CREATE VIEW postfix_virtual 
+    AS SELECT m.username||'@'||d.domain AS userid, a.alias||'@'||d.domain AS address 
+    FROM vmails_domain d, vmails_alias a, vmails_mailbox m 
+    WHERE a.mailbox_id = m.id AND m.domain_id = d.id 
+    UNION ALL 
+    SELECT m.username||'@'||d.domain AS userid, m.username||'@'||d.domain 
+    FROM vmails_domain d, vmails_mailbox m WHERE m.domain_id = d.id;
+
+CREATE VIEW postfix_mailboxes 
+    AS SELECT m.username||'@'||d.domain AS userid, d.domain||'/'||m.username||'/' AS mailbox 
+    FROM vmails_domain d, vmails_mailbox m
+    WHERE m.domain_id = d.id 
+    UNION ALL SELECT d.domain AS userid, 'dummy' AS mailbox 
+    FROM vmails_domain d;
+
+CREATE VIEW dovecot_users 
+    AS SELECT m.username||'@'||d.domain AS mailbox, m.password, '/home/vmail/'||d.domain||'/'||m.username AS home
+    FROM vmails_mailbox m, vmails_domain d 
+    WHERE m.domain_id = d.id;
+#+END_SRC
