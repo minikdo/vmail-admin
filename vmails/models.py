@@ -14,7 +14,7 @@ class TimeStampedModel(models.Model):
 
     created = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     modified = models.DateTimeField(auto_now=True, blank=True)
-    created_by = models.ForeignKey(User,
+    created_by = models.ForeignKey(User, default=1,
                                    on_delete=models.SET_NULL,
                                    null=True)
 
@@ -37,6 +37,7 @@ class Mailbox(TimeStampedModel):
 
     class Meta:
         unique_together = ['username', 'domain']
+        ordering = ['username']
 
     def clean(self):
         if "@" in self.username:
@@ -49,7 +50,8 @@ class Mailbox(TimeStampedModel):
         super().save(*args, *kwargs)
 
     def __str__(self):
-        return "{}@{}".format(self.username, self.domain.domain)
+        return "{} ({}@{})".format(self.realname, self.username,
+                                   self.domain.domain)
 
 
 class Alias(TimeStampedModel):
