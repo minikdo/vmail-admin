@@ -64,3 +64,4 @@ class Alias(TimeStampedModel):
 
     class Meta:
         verbose_name_plural = 'Aliases'
+        ordering = ['alias']
