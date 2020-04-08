@@ -1,0 +1,9 @@
+* create postgresql views
+
+#+BEGIN_SRC sh
+create view postfix_virtual as select m.username||'@'||d.domain as userid, a.alias||'@'||d.domain as address from vmails_domain d, vmails_alias a, vmails_mailbox m where a.mailbox_id = m.id and m.domain_id = d.id union all select m.username||'@'||d.domain as userid, m.username||'@'||d.domain from vmails_domain d, vmails_mailbox m where m.domain_id = d.id;
+
+create view postfix_mailboxes as select m.username||'@'||d.domain as userid, d.domain||'/'||m.username||'/' as mailbox from vmails_domain d, vmails_mailbox m where m.domain_id = d.id union all select d.domain as userid, 'dummy' as mailbox from vmails_domain d;
+
+create view dovecot_users as SELECT m.username||'@'||d.domain as mailbox, m.password, '/home/vmail/'||d.domain||'/'||m.username as home FROM vmails_mailbox m, vmails_domain d WHERE m.domain_id = d.id;
+#+END_SRC
