@@ -1,7 +1,7 @@
 ---
-- hosts: "{{ remote_host }}"
+- hosts: "{{ host }}"
 
-  remote_user: "{{ remote_user }}"
+  remote_user: "{{ user }}"
 
   tasks:
   - name: git pull project
