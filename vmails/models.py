@@ -38,6 +38,7 @@ class Mailbox(TimeStampedModel):
     class Meta:
         unique_together = ['username', 'domain']
         ordering = ['username']
+        verbose_name_plural = 'Mailboxes'
 
     def clean(self):
         if "@" in self.username:
@@ -60,3 +61,6 @@ class Alias(TimeStampedModel):
 
     def __str__(self):
         return "{} -> {}".format(self.alias, self.mailbox)
+
+    class Meta:
+        verbose_name_plural = 'Aliases'
