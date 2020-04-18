@@ -1,5 +1,12 @@
-* create postgresql views
-
+* Installation
+** Create users and database
+#+BEGIN_SRC sql
+CREATE USER mailreader PASSWORD 'secret';
+CREATE USER mailwriter PASSWORD 'secret';
+CREATE DATABASE vmails WITH owner = mailwriter;
+#+END_SRC
+** Migrate tables
+** Create views
 #+BEGIN_SRC sql
 CREATE VIEW postfix_virtual 
     AS SELECT m.username||'@'||d.domain AS userid, a.alias||'@'||d.domain AS address 
@@ -20,4 +27,7 @@ CREATE VIEW dovecot_users
     AS SELECT m.username||'@'||d.domain AS mailbox, m.password, '/home/vmail/'||d.domain||'/'||m.username AS home
     FROM vmails_mailbox m, vmails_domain d 
     WHERE m.domain_id = d.id;
+
+GRANT SELECT ON postfix_mailboxes, postfix_virtual, dovecot_users, vmails_alias,
+    vmails_domain, vmails_mailbox TO mailreader;
 #+END_SRC
