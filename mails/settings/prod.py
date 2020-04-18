@@ -12,6 +12,6 @@ DATABASES = {
     }
 }
 
-ALLOWED_HOSTS += ['vmails']
+ALLOWED_HOSTS += get_secret('ALLOWED_HOSTS')
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
