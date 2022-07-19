@@ -148,3 +148,5 @@ LOGOUT_REDIRECT_URL = '/login/'
 ADMIN_EMAIL = get_secret('ADMIN_EMAIL')
 ADMIN_NAME = get_secret('ADMIN_NAME')
 ADMINS = [(ADMIN_NAME, ADMIN_EMAIL)]
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
