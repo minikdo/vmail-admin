@@ -1,5 +1,0 @@
-remote_host: 
-remote_user:
-git_repo: https://github.com/minikdo/mails.git
-proj_path:
-wsgi_path:

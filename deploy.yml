@@ -1,15 +1,22 @@
----
-- hosts: "{{ host }}"
-
-  remote_user: "{{ user }}"
+- name: Deploy vmails-admin
+  hosts: srv-linode2
+  remote_user: domino
+  gather_facts: false
+  vars:
+    repo: http://git.vpn.dominowisla.pl/vmails-admin
+    dest: /home/domino/sites/vmails-admin
 
   tasks:
-  - name: git pull project
-    git:
-      repo: "{{ git_repo }}"
-      dest: "{{ proj_path }}"
+    - name: Git pull project
+      ansible.builtin.git:
+        repo: "{{ repo }}"
+        dest: "{{ dest }}"
+        version: "main"
 
-  - name: touch wsgi.py
-    file:
-      path: '{{ wsgi_path }}/wsgi.py'
-      state: touch
+    - name: Collect static files
+      environment:
+        DJANGO_SETTINGS_MODULE: "config.settings.prod"
+      community.general.django_manage:
+        command: "collectstatic --noinput"
+        project_path: "{{ dest }}"
+        virtualenv: "{{ dest }}/venv"
