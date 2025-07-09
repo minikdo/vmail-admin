@@ -4,14 +4,19 @@ DEBUG = False
 
 DATABASES = {
     'default': {
-        'ENGINE': get_secret('DB_ENGINE'),
-        'NAME': get_secret('DB_NAME'),
-        'USER': get_secret('DB_USER'),
-        'HOST': get_secret('DB_HOST'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'vmails',
+        'USER': 'mailwriter',
+        'HOST': '127.0.0.1',
+        'PORT': get_secret('DB_PORT'),
         'PASSWORD': get_secret('DB_PASS'),
     }
 }
 
-ALLOWED_HOSTS += get_secret('ALLOWED_HOSTS')
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+]
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+CSRF_TRUSTED_ORIGINS = [
+    'http://vmails.vpn.dominowisla.pl',
+]
