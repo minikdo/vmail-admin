@@ -43,7 +43,7 @@ class Mailbox(TimeStampedModel):
         verbose_name_plural = 'Mailboxes'
 
     def __init__(self, *args, **kwargs):
-        super(Radcheck, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.__original_password = self.password
 
     def clean(self):
