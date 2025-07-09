@@ -1,10 +1,10 @@
-- name: Deploy vmails-admin
+- name: Deploy vmail-admin
   hosts: srv-linode2
   remote_user: domino
   gather_facts: false
   vars:
-    repo: http://git.vpn.dominowisla.pl/vmails-admin
-    dest: /home/domino/sites/vmails-admin
+    repo: https://github.com/minikdo/vmail-admin.git
+    dest: /home/domino/sites/vmail-admin
 
   tasks:
     - name: Git pull project
