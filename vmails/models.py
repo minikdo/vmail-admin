@@ -35,18 +35,26 @@ class Mailbox(TimeStampedModel):
     realname = models.CharField(max_length=64, blank=True, null=True)
     password = models.CharField(max_length=500)
 
+    __original_password = None
+
     class Meta:
         unique_together = ['username', 'domain']
         ordering = ['username']
         verbose_name_plural = 'Mailboxes'
+
+    def __init__(self, *args, **kwargs):
+        super(Radcheck, self).__init__(*args, **kwargs)
+        self.__original_password = self.password
 
     def clean(self):
         if "@" in self.username:
             raise ValidationError({'username': 'only username without @'})
 
     def save(self, *args, **kwargs):
-        self.password = sha512_crypt.encrypt(self.password)
-        self.password = "{SHA512-CRYPT}" + self.password
+
+        if self.__original_password != self.password:
+            self.password = sha512_crypt.encrypt(self.password)
+            self.password = "{SHA512-CRYPT}" + self.password
 
         super().save(*args, *kwargs)
 
