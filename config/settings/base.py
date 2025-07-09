@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(
     os.path.abspath(__file__))))
 
 # JSON-based secrets module
-with open(os.path.join(BASE_DIR, 'mails', 'settings', 'secrets.json')) as f:
+with open(os.path.join(BASE_DIR, 'config', 'settings', 'secrets.json')) as f:
     secrets = json.loads(f.read())
 
     def get_secret(setting, secrets=secrets):
@@ -69,7 +69,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'mails.urls'
+ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
     {
@@ -87,7 +87,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'mails.wsgi.application'
+WSGI_APPLICATION = 'config.wsgi.application'
 
 
 # Database
