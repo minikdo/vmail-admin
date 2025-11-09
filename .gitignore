@@ -8,4 +8,5 @@ __pycache__/
 secrets.json
 /media
 vars.yml
+/static_collected
 
