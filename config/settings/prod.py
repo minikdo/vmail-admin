@@ -19,4 +19,5 @@ ALLOWED_HOSTS = [
 
 CSRF_TRUSTED_ORIGINS = [
     'http://vmail-admin.vpn.dominowisla.pl',
+    'http://vmails.vpn.dominowisla.pl',
 ]
