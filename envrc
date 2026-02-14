@@ -1,0 +1,3 @@
+# rename this file to .envrc
+export DJANGO_SETTINGS_MODULE=config.settings.dev
+export ANSIBLE_INVENTORY=hosts

@@ -1,22 +1,7 @@
 - name: Deploy vmail-admin
-  hosts: srv-linode2
-  remote_user: domino
-  gather_facts: false
+  import_playbook: /home/domino/projects/playbooks/django.yml
   vars:
-    repo: https://github.com/minikdo/vmail-admin.git
-    dest: /home/domino/sites/vmail-admin
-
-  tasks:
-    - name: Git pull project
-      ansible.builtin.git:
-        repo: "{{ repo }}"
-        dest: "{{ dest }}"
-        version: "main"
-
-    - name: Collect static files
-      environment:
-        DJANGO_SETTINGS_MODULE: "config.settings.prod"
-      community.general.django_manage:
-        command: "collectstatic --noinput"
-        project_path: "{{ dest }}"
-        virtualenv: "{{ dest }}/venv"
+    target_hosts: srv-linode2
+    project_name: vmail-admin
+    has_celery: false
+    has_node: false
